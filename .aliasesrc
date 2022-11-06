@@ -1,0 +1,38 @@
+alias sc='echo -e "\nMy shortcuts: \n"; cat ~/.aliasesrc| grep alias; echo -e "\n"'
+alias gs='git status'
+alias gco="git checkout"
+alias gcob="git checkout -b"
+alias gcam="git commit -am"
+alias gd='git diff'
+alias gdh='git diff HEAD^'
+alias gcm='git commit -m'
+alias gb='git branch'
+alias gra='git remote add'
+alias grr='git remote rm'
+alias gpl='git pull'
+alias gm='git merge --no-ff'
+alias gcl='git clone'
+alias uncommit='git reset --soft HEAD^'
+alias rmb='git branch -D'
+alias ggpush='git push origin $(current_branch)'
+alias ggpull='git pull origin $(current_branch)'
+
+
+
+
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
+
+gpr() { # alias
+    if [[ -z $1 ]]; then
+        target_branch='release'
+    else
+        target_branch=$1
+    fi
+    branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+    repo=$(basename `git rev-parse --show-toplevel`)
+    open "https://github.com/sbraverman/${repo}/compare/${target_branch}...sbraverman:${branch}?expand=1"
+ }
