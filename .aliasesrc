@@ -6,6 +6,7 @@ alias gcam="git commit -am"
 alias gd='git diff'
 alias gdh='git diff HEAD^'
 alias gcm='git commit -m'
+alias gl='git log'
 alias gb='git branch'
 alias gra='git remote add'
 alias grr='git remote rm'
